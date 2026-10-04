@@ -22,6 +22,16 @@ Research   Financial        Competitor    News        (run in parallel)
             Rendered report + download
 ```
 
+## Features
+
+- **Six specialised agents** — Research, Financial, Competitor, News, Risk and Report.
+- **Parallel research** — the four research agents run concurrently in the LangGraph.
+- **Live web research** — free DuckDuckGo search + `trafilatura` extraction, Tavily optional.
+- **Structured outputs** — every agent returns a validated Pydantic model.
+- **Scored investment report** — risk model, recommendation, Markdown/JSON download.
+- **Honest about gaps** — missing private financials are flagged, never invented.
+- **Live progress UI** — watch each agent finish in Streamlit.
+
 ## Stack
 
 - **LangGraph** — orchestration (the coordinator is the graph)
@@ -41,6 +51,15 @@ python check_key.py         # verify the key works before anything else
 > The Gemini key must be a Google **AI Studio** key (starts with `AIza…`) from
 > https://aistudio.google.com/apikey. If `check_key.py` fails with an auth error,
 > your key is the wrong type.
+
+## Configuration (`.env`)
+
+| Var | Purpose | Required |
+|---|---|---|
+| `GEMINI_API_KEY` | Google AI Studio key | Yes |
+| `TAVILY_API_KEY` | Use Tavily instead of DuckDuckGo search | No |
+| `GEMINI_FAST_MODEL` | Override research model (default `gemini-2.5-flash`) | No |
+| `GEMINI_PRO_MODEL` | Override risk/report model (default `gemini-2.5-pro`) | No |
 
 ## Run
 
@@ -77,3 +96,9 @@ pytest tests/
 - **LinkedIn** isn't scraped directly; the research agent uses public search results
   mentioning the team.
 - Each run is **stateless** (no database in v1).
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).
